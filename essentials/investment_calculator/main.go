@@ -1,5 +1,5 @@
 // You can write Go code here!
-package main
+package investmentcalculator
 
 import (
 	"fmt"
