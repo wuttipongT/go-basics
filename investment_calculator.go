@@ -1,7 +1,10 @@
 // You can write Go code here!
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"math"
+)
 
 func main() {
 	// Application entry point
@@ -13,8 +16,9 @@ func main() {
 	var years = 10
 
 	// Calculate future value
-	var futureValue = investmentAmount * (1 + expectedReturnRate/100) * years
+	var futureValue = float64(investmentAmount) * math.Pow(1+expectedReturnRate/100, float64(years))
 	fmt.Printf("Future value of the investment: %.2f\n", futureValue)
+	// To verify whether this is correct or not, opening up some future value calculator online: https://bitl.to/5HQ2
 }
 
 // go run app.go
