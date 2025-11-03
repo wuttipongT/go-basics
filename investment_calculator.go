@@ -11,12 +11,12 @@ func main() {
 
 	//fmt.Print("Hello World!")
 
-	var investmentAmount = 1000
+	var investmentAmount float64 = 1000
 	var expectedReturnRate = 5.5
-	var years = 10
+	var years float64 = 10
 
 	// Calculate future value
-	var futureValue = float64(investmentAmount) * math.Pow(1+expectedReturnRate/100, float64(years))
+	var futureValue = investmentAmount * math.Pow(1+expectedReturnRate/100, years)
 	fmt.Printf("Future value of the investment: %.2f\n", futureValue)
 	// To verify whether this is correct or not, opening up some future value calculator online: https://bitl.to/5HQ2
 }
