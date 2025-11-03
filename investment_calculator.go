@@ -31,6 +31,8 @@ func main() {
 	fmt.Printf("Future value of the investment: %.2f\n", futureValue)
 	fmt.Printf("Future real value of the investment (adjusted for inflation): %.2f\n", futureRealValue)
 	// To verify whether this is correct or not, opening up some future value calculator online: https://bitl.to/5HQ2
+
+	// Example output:
 }
 
 // go run app.go
