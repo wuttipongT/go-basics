@@ -10,10 +10,19 @@ func main() {
 	// Application entry point
 
 	//fmt.Print("Hello World!")
-	const inflationRate = 6.5
-	var investmentAmount float64 = 10000
-	years := 10.0
+	const inflationRate = 2.5
+	var investmentAmount float64
+	var years float64
 	expectedReturnRate := 5.5
+
+	fmt.Print("Enter the investment amount: ")
+	fmt.Scan(&investmentAmount)
+
+	fmt.Print("Enter the expected return rate (in %): ")
+	fmt.Scan(&expectedReturnRate)
+
+	fmt.Print("Enter the number of years: ")
+	fmt.Scan(&years)
 
 	// Calculate future value
 	futureValue := investmentAmount * math.Pow(1+expectedReturnRate/100, years)
