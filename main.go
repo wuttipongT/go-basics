@@ -10,6 +10,7 @@ import (
 	"example.com/myapp/lessons/calculators/financial/futureval"
 	roi "example.com/myapp/lessons/calculators/financial/roi"
 	"example.com/myapp/lessons/note"
+	"example.com/myapp/lessons/todo"
 )
 
 type str string
@@ -35,6 +36,7 @@ func main() {
 		outputText("4. Pointers\n")
 		outputText("5. Structs\n")
 		outputText("6. Note\n")
+		outputText("7. Todo\n")
 		outputText("Q. Quit\n")
 		outputText("Enter choice: ")
 
@@ -54,6 +56,8 @@ func main() {
 			lessons.Structs() // Structs & Custom Types
 		case "6":
 			note.New()
+		case "7":
+			todo.New()
 		case "Q", "q":
 			outputText("Exiting the program.\n")
 			return
