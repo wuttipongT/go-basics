@@ -1,10 +1,48 @@
 package bank
 
-import "fmt"
+import (
+	"errors"
+	"fmt"
+	"os"
+	"strconv"
+)
+
+const accountBalanceFile = "balance.txt"
+
+func getBalanceFromFile() (float64, error) {
+	// Placeholder for file reading logic
+	data, err := os.ReadFile(accountBalanceFile)
+
+	if err != nil {
+		return 1000, errors.New("Failed to read balance file.")
+	}
+
+	balanceText := string(data)
+	balance, err := strconv.ParseFloat(balanceText, 64)
+
+	if err != nil {
+		return 1000, errors.New("Failed to parse stored balance value.")
+	}
+
+	return balance, nil
+}
+
+func writeBalanceToFile(balance float64) {
+	// Placeholder for file writing logic
+	balanceText := fmt.Sprint(balance)
+	os.WriteFile(accountBalanceFile, []byte(balanceText), 0644)
+}
 
 func Run() {
-	var accountBalance = 1000.0
+	var accountBalance, err = getBalanceFromFile()
 	// Placeholder for bank application logic
+	if err != nil {
+		fmt.Println("Error")
+		fmt.Println(err)
+		fmt.Println("----------- ")
+		//return
+		//panic("Can't continue, sorry!")
+	}
 
 	for {
 		fmt.Println("Welcome to Go Bank!")
@@ -19,10 +57,10 @@ func Run() {
 		fmt.Scan(&choice)
 
 		//wantsCheckBalance := choice == 1
-
-		if choice == 1 {
+		switch choice {
+		case 1:
 			fmt.Printf("Your balance is: $%.2f\n", accountBalance)
-		} else if choice == 2 {
+		case 2:
 			fmt.Print("Your deposit: ")
 			var depositAmount float64
 			fmt.Scan(&depositAmount)
@@ -35,7 +73,8 @@ func Run() {
 
 			accountBalance += depositAmount
 			fmt.Println("Balance updated! New amount:", accountBalance)
-		} else if choice == 3 {
+			writeBalanceToFile(accountBalance)
+		case 3:
 			fmt.Print("Withdrawal amount: ")
 			var withdrawalAmount float64
 			fmt.Scan(&withdrawalAmount)
@@ -52,11 +91,12 @@ func Run() {
 
 			accountBalance -= withdrawalAmount
 			fmt.Println("Balance updated! New amount:", accountBalance)
-
-		} else {
+			writeBalanceToFile(accountBalance)
+		default:
 			fmt.Println("Goodbye!")
-			break
+			fmt.Println("Thank you for using Go Bank!")
+			return
+			//break
 		}
 	}
-	fmt.Println("Thank you for using Go Bank!")
 }
