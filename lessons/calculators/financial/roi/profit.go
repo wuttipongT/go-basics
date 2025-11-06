@@ -1,4 +1,4 @@
-package calculators
+package roi
 
 import (
 	"errors"
@@ -13,7 +13,7 @@ import (
 //  - Not 0
 // 2) Store calculatted results into file
 
-func Profit() {
+func New() {
 	// var revenue float64
 	// var expenses float64
 	// var txtRate float64

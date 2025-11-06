@@ -9,7 +9,7 @@ import (
 
 const accountBalanceFile = "balance.txt"
 
-func Run() {
+func New() {
 	var accountBalance, err = fileops.GetFloatFromFile(accountBalanceFile)
 	// Placeholder for bank application logic
 	if err != nil {
