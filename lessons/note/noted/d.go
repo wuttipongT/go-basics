@@ -10,18 +10,18 @@ import (
 )
 
 type Note struct {
-	title    string
-	content  string
-	createAt time.Time
+	Title    string    `json:"title"`
+	Content  string    `json:"content"`
+	CreateAt time.Time `json:"create_at"`
 }
 
 func (n Note) Display() {
-	fmt.Printf("Your note titled %v has the following content:\n\n%v", n.title, n.content)
+	fmt.Printf("Your note titled %v has the following content:\n\n%v\n\n", n.Title, n.Content)
 }
 
 func (n Note) Save() error {
-	fileName := strings.ReplaceAll(n.title, " ", "_")
-	fileName = strings.ToLower(fileName)
+	fileName := strings.ReplaceAll(n.Title, " ", "_")
+	fileName = strings.ToLower(fileName) + ".json"
 
 	json, err := json.Marshal(n)
 
@@ -37,8 +37,8 @@ func New(title, content string) (Note, error) {
 		return Note{}, errors.New("Invalid input.")
 	}
 	return Note{
-		title:    title,
-		content:  content,
-		createAt: time.Now(),
+		Title:    title,
+		Content:  content,
+		CreateAt: time.Now(),
 	}, nil
 }
