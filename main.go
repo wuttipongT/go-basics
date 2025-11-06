@@ -5,9 +5,9 @@ import (
 	"fmt"
 	"os"
 
-	bank "example.com/myapp/essentials/bank"
-	investmentcalculator "example.com/myapp/essentials/investment_calculator"
-	profitcalculator "example.com/myapp/essentials/profit_calculator"
+	"example.com/myapp/lessons"
+	"example.com/myapp/lessons/bank"
+	"example.com/myapp/lessons/calculators"
 )
 
 func main() {
@@ -18,6 +18,7 @@ func main() {
 		outputText("1. Investment Calculator\n")
 		outputText("2. Profit Calculator\n")
 		outputText("3. Go Bank\n")
+		outputText("4. Pointers\n")
 		outputText("Q. Quit\n")
 		outputText("Enter choice: ")
 
@@ -26,11 +27,13 @@ func main() {
 
 		switch choice {
 		case "1":
-			investmentcalculator.Run()
+			calculators.Investment()
 		case "2":
-			profitcalculator.Run()
+			calculators.Profit()
 		case "3":
 			bank.Run()
+		case "4":
+			lessons.Pointers()
 		case "Q", "q":
 			outputText("Exiting the program.\n")
 			return

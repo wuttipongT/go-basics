@@ -1,5 +1,5 @@
 // You can write Go code here!
-package investmentcalculator
+package calculators
 
 import (
 	"fmt"
@@ -8,7 +8,7 @@ import (
 
 const inflationRate = 2.5
 
-func Run() {
+func Investment() {
 	// Application entry point
 
 	//fmt.Print("Hello World!")

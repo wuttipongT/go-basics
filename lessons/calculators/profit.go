@@ -1,4 +1,4 @@
-package profitcalculator
+package calculators
 
 import (
 	"errors"
@@ -13,7 +13,7 @@ import (
 //  - Not 0
 // 2) Store calculatted results into file
 
-func Run() {
+func Profit() {
 	// var revenue float64
 	// var expenses float64
 	// var txtRate float64

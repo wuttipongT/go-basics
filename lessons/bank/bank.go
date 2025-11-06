@@ -1,40 +1,16 @@
 package bank
 
 import (
-	"errors"
 	"fmt"
-	"os"
-	"strconv"
+
+	"example.com/myapp/lessons/bank/fileops"
+	"github.com/Pallinder/go-randomdata"
 )
 
 const accountBalanceFile = "balance.txt"
 
-func getBalanceFromFile() (float64, error) {
-	// Placeholder for file reading logic
-	data, err := os.ReadFile(accountBalanceFile)
-
-	if err != nil {
-		return 1000, errors.New("Failed to read balance file.")
-	}
-
-	balanceText := string(data)
-	balance, err := strconv.ParseFloat(balanceText, 64)
-
-	if err != nil {
-		return 1000, errors.New("Failed to parse stored balance value.")
-	}
-
-	return balance, nil
-}
-
-func writeBalanceToFile(balance float64) {
-	// Placeholder for file writing logic
-	balanceText := fmt.Sprint(balance)
-	os.WriteFile(accountBalanceFile, []byte(balanceText), 0644)
-}
-
 func Run() {
-	var accountBalance, err = getBalanceFromFile()
+	var accountBalance, err = fileops.GetFloatFromFile(accountBalanceFile)
 	// Placeholder for bank application logic
 	if err != nil {
 		fmt.Println("Error")
@@ -44,11 +20,12 @@ func Run() {
 		//panic("Can't continue, sorry!")
 	}
 
-	for {
+	fmt.Println("Welcome to Go Bank!")
+	fmt.Println("Reach us 24/7", randomdata.PhoneNumber())
 
+	for {
 		presentOptions()
 
-		// fmt.Println("Welcome to Go Bank!")
 		// fmt.Println("What do you want to do?")
 		// fmt.Println("1. Check Balance")
 		// fmt.Println("2. Deposit Money")
@@ -60,6 +37,7 @@ func Run() {
 		fmt.Scan(&choice)
 
 		//wantsCheckBalance := choice == 1
+
 		switch choice {
 		case 1:
 			fmt.Printf("Your balance is: $%.2f\n", accountBalance)
@@ -76,7 +54,7 @@ func Run() {
 
 			accountBalance += depositAmount
 			fmt.Println("Balance updated! New amount:", accountBalance)
-			writeBalanceToFile(accountBalance)
+			fileops.WriteFloatToFile(accountBalance, accountBalanceFile)
 		case 3:
 			fmt.Print("Withdrawal amount: ")
 			var withdrawalAmount float64
@@ -94,7 +72,7 @@ func Run() {
 
 			accountBalance -= withdrawalAmount
 			fmt.Println("Balance updated! New amount:", accountBalance)
-			writeBalanceToFile(accountBalance)
+			fileops.WriteFloatToFile(accountBalance, accountBalanceFile)
 		default:
 			fmt.Println("Goodbye!")
 			fmt.Println("Thank you for using Go Bank!")
