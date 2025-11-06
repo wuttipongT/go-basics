@@ -19,6 +19,7 @@ func main() {
 		outputText("2. Profit Calculator\n")
 		outputText("3. Go Bank\n")
 		outputText("4. Pointers\n")
+		outputText("5. Structs\n")
 		outputText("Q. Quit\n")
 		outputText("Enter choice: ")
 
@@ -33,7 +34,9 @@ func main() {
 		case "3":
 			bank.Run()
 		case "4":
-			lessons.Pointers()
+			lessons.Pointers() // Understanding Pointers
+		case "5":
+			lessons.Structs() // Structs & Custom Types
 		case "Q", "q":
 			outputText("Exiting the program.\n")
 			return
