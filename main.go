@@ -13,6 +13,8 @@ import (
 	"example.com/myapp/lessons/todo"
 )
 
+var useDefualt bool = true
+
 type str string
 
 func (s str) log() {
@@ -29,46 +31,65 @@ func main() {
 	//name = "Go Basics Application"
 	name.log()
 
-	reader := bufio.NewReader(os.Stdin)
+	choice := "10"
 
-	for {
-		outputText("Select a program to run:\n")
-		outputText("1. Investment Calculator\n")
-		outputText("2. Profit Calculator\n")
-		outputText("3. Go Bank\n")
-		outputText("4. Pointers\n")
-		outputText("5. Structs\n")
-		outputText("6. Note\n")
-		outputText("7. Todo\n")
-		outputText("Q. Quit\n")
-		outputText("Enter choice: ")
+	if useDefualt {
+		lessions(choice)
+	} else {
+		reader := bufio.NewReader(os.Stdin)
 
-		choice, _ := reader.ReadString('\n')
-		choice = choice[:len(choice)-1] // Remove newline character
+		for {
+			outputText("Select a program to run:\n")
+			outputText("1. Investment Calculator\n")
+			outputText("2. Profit Calculator\n")
+			outputText("3. Go Bank\n")
+			outputText("4. Pointers\n")
+			outputText("5. Structs\n")
+			outputText("6. Note\n")
+			outputText("7. Todo\n")
+			outputText("8. Lists\n")
+			outputText("9. Quiz\n")
+			outputText("10 Introducing Maps\n")
+			outputText("Q. Quit\n")
+			outputText("Enter choice: ")
 
-		switch choice {
-		case "1":
-			futureval.New()
-		case "2":
-			roi.New()
-		case "3":
-			bank.New()
-		case "4":
-			lessons.Pointers() // Understanding Pointers
-		case "5":
-			lessons.Structs() // Structs & Custom Types
-		case "6":
-			note.New()
-		case "7":
-			todo.New()
-		case "Q", "q":
-			outputText("Exiting the program.\n")
-			return
-		default:
-			outputText("Invalid choice. Please try again.\n")
+			choice, _ = reader.ReadString('\n')
+			choice = choice[:len(choice)-1] // Remove newline character
+
+			lessions(choice)
+
+			fmt.Println()
 		}
+	}
+}
 
-		fmt.Println()
+func lessions(choice string) {
+	switch choice {
+	case "1":
+		futureval.New()
+	case "2":
+		roi.New()
+	case "3":
+		bank.New()
+	case "4":
+		lessons.Pointers() // Understanding Pointers
+	case "5":
+		lessons.Structs() // Structs & Custom Types
+	case "6":
+		note.New()
+	case "7":
+		todo.New()
+	case "8":
+		lessons.Lists()
+	case "9":
+		lessons.Practice()
+	case "10":
+		lessons.Maps()
+	case "Q", "q":
+		outputText("Exiting the program.\n")
+		return
+	default:
+		outputText("Invalid choice. Please try again.\n")
 	}
 }
 
