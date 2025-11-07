@@ -31,7 +31,7 @@ func main() {
 	//name = "Go Basics Application"
 	name.log()
 
-	choice := "10"
+	choice := "11"
 
 	if useDefualt {
 		lessions(choice)
@@ -50,6 +50,7 @@ func main() {
 			outputText("8. Lists\n")
 			outputText("9. Quiz\n")
 			outputText("10 Introducing Maps\n")
+			outputText("11 \"\"make\"\" function\n")
 			outputText("Q. Quit\n")
 			outputText("Enter choice: ")
 
@@ -85,6 +86,8 @@ func lessions(choice string) {
 		lessons.Practice()
 	case "10":
 		lessons.Maps()
+	case "11":
+		lessons.Make()
 	case "Q", "q":
 		outputText("Exiting the program.\n")
 		return
