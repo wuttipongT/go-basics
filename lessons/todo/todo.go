@@ -30,6 +30,11 @@ type outputtable interface {
 
 func New() {
 	// This is a placeholder file to demonstrate the note lesson.
+
+	printSomething(1)
+	printSomething(1.5)
+	printSomething("Hello")
+
 	title, content := getNoteData()
 	todoText := getUserInput("Todo text: ")
 
@@ -64,6 +69,36 @@ func New() {
 	if err != nil {
 		return
 	}
+}
+
+func printSomething(value interface{}) { // accept any kind of value
+	intVal, ok := value.(int)
+	if ok {
+		fmt.Println("Integer:", intVal)
+	}
+
+	floatVal, ok := value.(float64)
+	if ok {
+		fmt.Println("Float:", floatVal)
+	}
+
+	stringVal, ok := value.(string)
+	if ok {
+		fmt.Println("String:", stringVal)
+	}
+
+	// switch value.(type) {
+	// case int:
+	// 	fmt.Println("Interger: ", value)
+	// case float64:
+	// 	fmt.Println("Float:", value)
+	// case string:
+	// 	fmt.Println(value)
+	// default:
+	// 	// ...
+	// }
+
+	// fmt.Println(value)
 }
 
 func outputData(data outputtable) error {

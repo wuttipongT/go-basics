@@ -72,3 +72,46 @@ func main() {
 func outputText(text string) {
 	fmt.Printf("%v", text)
 }
+
+// func add (a, b interface {}) {
+// /*
+// Interfaces, Dynamic Types & Limittations
+// Go accepts any kind of value here as an input.
+// But as you see, I'm getting an error here now,
+// that this plus operator is not defined on
+// such a dynamic value type,
+// because not all values support the plus operator.
+// You can't for example add two structs together.
+// So this is a bit too flexible.
+// */
+// 	return a + b;
+// }
+
+func add(a, b interface{}) interface{} {
+
+	aInt, aIsInt := a.(int)
+	bInt, bIsInt := b.(int)
+
+	if aIsInt && bIsInt {
+
+		return aInt + bInt
+	}
+
+	aFloat, aIsFloat := a.(float64)
+	bFloat, bIsFloat := b.(float64)
+
+	if aIsFloat && bIsFloat {
+
+		return aFloat + bFloat
+	}
+
+	aString, aIsString := a.(string)
+	bString, bIsString := b.(string)
+
+	if aIsString && bIsString {
+
+		return aString + bString
+	}
+
+	return nil
+}
