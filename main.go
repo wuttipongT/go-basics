@@ -5,13 +5,14 @@ import (
 	"fmt"
 	"os"
 
-	"example.com/myapp/lessons"
-	"example.com/myapp/lessons/bank"
-	"example.com/myapp/lessons/calculators/financial/futureval"
-	roi "example.com/myapp/lessons/calculators/financial/roi"
-	"example.com/myapp/lessons/modules"
-	"example.com/myapp/lessons/note"
-	"example.com/myapp/lessons/todo"
+	"example.com/jeff/go-basics/lessons"
+	"example.com/jeff/go-basics/lessons/bank"
+	"example.com/jeff/go-basics/lessons/calculators/financial/futureval"
+	"example.com/jeff/go-basics/lessons/calculators/financial/roi"
+	"example.com/jeff/go-basics/lessons/calculators/price"
+	"example.com/jeff/go-basics/lessons/modules"
+	"example.com/jeff/go-basics/lessons/note"
+	"example.com/jeff/go-basics/lessons/todo"
 )
 
 var useDefualt bool = true
@@ -32,7 +33,7 @@ func main() {
 	//name = "Go Basics Application"
 	name.log()
 
-	choice := "12"
+	choice := "13"
 
 	if useDefualt {
 		lessions(choice)
@@ -53,6 +54,7 @@ func main() {
 			outputText("10 Introducing Maps\n")
 			outputText("11 \"\"make\"\" function\n")
 			outputText("12 Functions & values & function types\n")
+			outputText("13 Price Calculator - Building a first, basic version of the program\n")
 			outputText("Q. Quit\n")
 			outputText("Enter choice: ")
 
@@ -92,6 +94,8 @@ func lessions(choice string) {
 		lessons.Make()
 	case "12":
 		modules.Functions()
+	case "13":
+		price.New()
 	case "Q", "q":
 		outputText("Exiting the program.\n")
 		return

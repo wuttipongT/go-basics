@@ -6,7 +6,7 @@ import (
 	"os"
 	"strings"
 
-	"example.com/myapp/lessons/note/noted"
+	"example.com/jeff/go-basics/lessons/note/noted"
 )
 
 func New() {

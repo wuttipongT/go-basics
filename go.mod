@@ -1,4 +1,4 @@
-module example.com/myapp
+module example.com/jeff/go-basics
 
 go 1.25.3
 

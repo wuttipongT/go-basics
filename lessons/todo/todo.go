@@ -6,8 +6,8 @@ import (
 	"os"
 	"strings"
 
-	"example.com/myapp/lessons/note/noted"
-	"example.com/myapp/lessons/todo/todod"
+	"example.com/jeff/go-basics/lessons/note/noted"
+	"example.com/jeff/go-basics/lessons/todo/todod"
 )
 
 type saver interface {

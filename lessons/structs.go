@@ -3,7 +3,7 @@ package lessons
 import (
 	"fmt"
 
-	"example.com/myapp/user"
+	"example.com/jeff/go-basics/user"
 )
 
 func Structs() {
