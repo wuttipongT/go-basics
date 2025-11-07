@@ -10,6 +10,10 @@ import (
 	"example.com/myapp/lessons/todo/todod"
 )
 
+type saver interface {
+	Save() error
+}
+
 func New() {
 	// This is a placeholder file to demonstrate the note lesson.
 	title, content := getNoteData()
@@ -22,16 +26,6 @@ func New() {
 		return
 	}
 
-	todo.Display()
-	err = todo.Save()
-
-	if err != nil {
-		fmt.Println("Saving the todo failed.")
-		return
-	}
-
-	fmt.Println("Saving the todo succeeded!")
-
 	userNote, err := noted.New(title, content)
 
 	if err != nil {
@@ -39,19 +33,31 @@ func New() {
 		return
 	}
 
-	userNote.Display()
-	err = userNote.Save()
+	todo.Display()
+	err = saveData(todo)
 
 	if err != nil {
-		fmt.Println("Saving the note failed.")
 		return
 	}
 
-	fmt.Println("Saving the note succeeded!")
+	userNote.Display()
+	err = saveData(userNote)
+
+	if err != nil {
+		return
+	}
 }
 
-func getTodoData() string {
-	return getUserInput("Todo text: ")
+func saveData(data saver) error {
+	err := data.Save()
+
+	if err != nil {
+		fmt.Println("Saving the note failed.")
+		return err
+	}
+
+	fmt.Println("Saving the note succeeded!")
+	return nil
 }
 
 func getNoteData() (string, string) {
