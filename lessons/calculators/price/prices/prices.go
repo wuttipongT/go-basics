@@ -1,64 +1,47 @@
 package prices
 
 import (
-	"bufio"
 	"fmt"
-	"os"
-	"strconv"
+
+	"example.com/jeff/go-basics/lessons/calculators/price/conversion"
+	"example.com/jeff/go-basics/lessons/calculators/price/iomanager"
 )
 
 type TaxIncludedPriceJob struct {
-	TaxRate           float64
-	InputPrices       []float64
-	TaxIncludedPrices map[string]float64
+	IOManager         iomanager.IOManager `json:"-"`
+	TaxRate           float64             `json:"tax_rate"`
+	InputPrices       []float64           `json:"input_prices"`
+	TaxIncludedPrices map[string]string   `json:"tax_included_prices"`
 }
 
-func (job TaxIncludedPriceJob) LoadData() {
-	file, err := os.Open("prices.txt")
+func (job *TaxIncludedPriceJob) LoadData() error {
+
+	//lines, err := filemanager.ReadLines("prices.txt")
+	lines, err := job.IOManager.ReadLines()
 
 	if err != nil {
-		fmt.Println("Could not open file!")
-		fmt.Println(err)
-		return
+		return err
 	}
 
-	scanner := bufio.NewScanner(file)
-
-	var lines []string
-
-	for scanner.Scan() {
-		lines = append(lines, scanner.Text())
-	}
-
-	err = scanner.Err()
+	prices, err := conversion.StringsToFloats(lines)
 
 	if err != nil {
-		fmt.Println("Reading the file content failed.")
-		fmt.Println(err)
-		file.Close()
-		return
-	}
-
-	prices := make([]float64, len(lines))
-
-	for lineIndex, line := range lines {
-		floatPrice, err := strconv.ParseFloat(line, 64)
-
-		if err != nil {
-			fmt.Println("Converting prie to float failed.")
-			fmt.Println(err)
-			file.Close()
-			return
-		}
-
-		prices[lineIndex] = floatPrice
+		return err
 	}
 
 	job.InputPrices = prices
+
+	//fmt.Println(job)
+
+	return nil
 }
 
-func (job TaxIncludedPriceJob) Process() {
-	job.LoadData()
+func (job *TaxIncludedPriceJob) Process() error {
+	err := job.LoadData()
+
+	if err != nil {
+		return err
+	}
 
 	result := make(map[string]string)
 
@@ -66,11 +49,19 @@ func (job TaxIncludedPriceJob) Process() {
 		taxIncludedPrice := price * (1 + job.TaxRate)
 		result[fmt.Sprintf("%.2f", price)] = fmt.Sprintf("%.2f", taxIncludedPrice)
 	}
-	fmt.Println(result)
+	//fmt.Println(result)
+
+	job.TaxIncludedPrices = result
+
+	//filemanager.WrtieJSON(fmt.Sprintf("result_%.0f.json", job.TaxRate*100), job)
+	job.IOManager.WriteResult(job)
+
+	return nil
 }
 
-func NewTaxIncludedPriceJob(taxRate float64) *TaxIncludedPriceJob {
+func NewTaxIncludedPriceJob(iom iomanager.IOManager, taxRate float64) *TaxIncludedPriceJob {
 	return &TaxIncludedPriceJob{
+		IOManager:   iom,
 		InputPrices: []float64{10, 20, 30},
 		TaxRate:     taxRate,
 	}

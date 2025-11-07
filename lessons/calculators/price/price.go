@@ -3,6 +3,7 @@ package price
 import (
 	"fmt"
 
+	"example.com/jeff/go-basics/lessons/calculators/price/filemanager"
 	"example.com/jeff/go-basics/lessons/calculators/price/prices"
 )
 
@@ -15,8 +16,15 @@ func New() {
 	//result := make(map[float64][]float64)
 
 	for _, taxRate := range taxRates {
-		priceJob := prices.NewTaxIncludedPriceJob(taxRate)
-		priceJob.Process()
+		fm := filemanager.New("prices.txt", fmt.Sprintf("result_%.0f.json", taxRate*100))
+		//cmdm := cmdmanager.New()
+		priceJob := prices.NewTaxIncludedPriceJob(fm, taxRate)
+		err := priceJob.Process()
+
+		if err != nil {
+			fmt.Println("Cloud not process job")
+			fmt.Println(err)
+		}
 	}
 
 	//fmt.Println(result)
