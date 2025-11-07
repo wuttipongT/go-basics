@@ -9,6 +9,7 @@ import (
 	"example.com/myapp/lessons/bank"
 	"example.com/myapp/lessons/calculators/financial/futureval"
 	roi "example.com/myapp/lessons/calculators/financial/roi"
+	"example.com/myapp/lessons/modules"
 	"example.com/myapp/lessons/note"
 	"example.com/myapp/lessons/todo"
 )
@@ -31,7 +32,7 @@ func main() {
 	//name = "Go Basics Application"
 	name.log()
 
-	choice := "11"
+	choice := "12"
 
 	if useDefualt {
 		lessions(choice)
@@ -51,6 +52,7 @@ func main() {
 			outputText("9. Quiz\n")
 			outputText("10 Introducing Maps\n")
 			outputText("11 \"\"make\"\" function\n")
+			outputText("12 Functions & values & function types\n")
 			outputText("Q. Quit\n")
 			outputText("Enter choice: ")
 
@@ -88,6 +90,8 @@ func lessions(choice string) {
 		lessons.Maps()
 	case "11":
 		lessons.Make()
+	case "12":
+		modules.Functions()
 	case "Q", "q":
 		outputText("Exiting the program.\n")
 		return
