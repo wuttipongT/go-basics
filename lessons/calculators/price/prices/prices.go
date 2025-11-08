@@ -36,11 +36,16 @@ func (job *TaxIncludedPriceJob) LoadData() error {
 	return nil
 }
 
-func (job *TaxIncludedPriceJob) Process() error {
+func (job *TaxIncludedPriceJob) Process(done chan bool, errChan chan error) {
 	err := job.LoadData()
 
+	// To test error chanel
+	// errChan <- errors.New("An error!")
+
 	if err != nil {
-		return err
+		//return err
+		errChan <- err
+		return
 	}
 
 	result := make(map[string]string)
@@ -55,8 +60,8 @@ func (job *TaxIncludedPriceJob) Process() error {
 
 	//filemanager.WrtieJSON(fmt.Sprintf("result_%.0f.json", job.TaxRate*100), job)
 	job.IOManager.WriteResult(job)
-
-	return nil
+	done <- true
+	//return nil
 }
 
 func NewTaxIncludedPriceJob(iom iomanager.IOManager, taxRate float64) *TaxIncludedPriceJob {

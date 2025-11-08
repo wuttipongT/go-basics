@@ -55,6 +55,7 @@ func main() {
 			outputText("11 \"\"make\"\" function\n")
 			outputText("12 Functions & values & function types\n")
 			outputText("13 Price Calculator - Building a first, basic version of the program\n")
+			outputText("14 Goroutines\n")
 			outputText("Q. Quit\n")
 			outputText("Enter choice: ")
 
@@ -96,6 +97,8 @@ func lessions(choice string) {
 		modules.Functions()
 	case "13":
 		price.New()
+	case "14":
+		lessons.Goroutines()
 	case "Q", "q":
 		outputText("Exiting the program.\n")
 		return
