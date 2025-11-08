@@ -1,5 +1,6 @@
 POST http://localhost:3000/events
 content-type: application/json
+Authorization: 
 
 {
     "name": "Test event 2",
