@@ -12,6 +12,7 @@ import (
 	"example.com/jeff/go-basics/lessons/calculators/price"
 	"example.com/jeff/go-basics/lessons/modules"
 	"example.com/jeff/go-basics/lessons/note"
+	restapi "example.com/jeff/go-basics/lessons/rest-api"
 	"example.com/jeff/go-basics/lessons/todo"
 )
 
@@ -25,6 +26,7 @@ func (s str) log() {
 }
 
 func main() {
+
 	result := add(1, 2)
 	fmt.Println("Intruducing generics: ", result)
 
@@ -33,7 +35,7 @@ func main() {
 	//name = "Go Basics Application"
 	name.log()
 
-	choice := "13"
+	choice := "15"
 
 	if useDefualt {
 		lessions(choice)
@@ -56,6 +58,7 @@ func main() {
 			outputText("12 Functions & values & function types\n")
 			outputText("13 Price Calculator - Building a first, basic version of the program\n")
 			outputText("14 Goroutines\n")
+			outputText("15 REST API\n")
 			outputText("Q. Quit\n")
 			outputText("Enter choice: ")
 
@@ -99,6 +102,8 @@ func lessions(choice string) {
 		price.New()
 	case "14":
 		lessons.Goroutines()
+	case "15":
+		restapi.New()
 	case "Q", "q":
 		outputText("Exiting the program.\n")
 		return
